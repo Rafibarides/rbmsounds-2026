@@ -251,3 +251,13 @@ export function stripeLinkFor(product) {
   const key = stripeLinkEnvKey(product.id);
   return import.meta.env[key] || "";
 }
+
+export function stripePromoLinkFor(product) {
+  const key = `VITE_STRIPE_PROMO_${product.id.replace(/-/g, "_").toUpperCase()}`;
+  return import.meta.env[key] || "";
+}
+
+export function isValidDiscountCode(code) {
+  const expected = import.meta.env.VITE_DISCOUNT_CODE || "";
+  return Boolean(expected) && code.trim().toUpperCase() === expected.toUpperCase();
+}

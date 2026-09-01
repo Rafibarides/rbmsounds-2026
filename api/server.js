@@ -191,10 +191,19 @@ function purchaseFromPack(pack, extras = {}) {
   };
 }
 
-async function createCheckout({ productId, email, clerkUserId, origin }) {
+async function createCheckout({ productId, email, clerkUserId, origin, discountCode }) {
   const pack = packs[productId];
   if (!pack) throw new Error("Unknown product");
   if (!email) throw new Error("Email is required");
+
+  let amount = pack.price;
+  if (discountCode) {
+    const expected = (process.env.DISCOUNT_CODE || "").toUpperCase();
+    if (!expected || discountCode.trim().toUpperCase() !== expected) {
+      throw new Error("That code is not valid.");
+    }
+    amount = Number(process.env.DISCOUNT_TOTAL || 500);
+  }
   const success = new URL("/thanks", origin || "http://localhost:5173");
   success.searchParams.set("session_id", "{CHECKOUT_SESSION_ID}");
   const session = await stripe("checkout/sessions", {
@@ -221,7 +230,7 @@ async function createCheckout({ productId, email, clerkUserId, origin }) {
         quantity: 1,
         price_data: {
           currency: "usd",
-          unit_amount: pack.price,
+          unit_amount: amount,
           product_data: {
             name: pack.name,
             images: artUrl[pack.id] ? [artUrl[pack.id]] : [],

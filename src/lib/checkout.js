@@ -1,7 +1,16 @@
-import { stripeLinkFor } from "../data/products";
+import {
+  isValidDiscountCode,
+  stripeLinkFor,
+  stripePromoLinkFor,
+} from "../data/products";
 import { checkoutHref } from "./purchases";
 
-export async function startCheckout({ product, email, clerkUserId }) {
+export async function startCheckout({ product, email, clerkUserId, discountCode }) {
+  const code = (discountCode || "").trim();
+  if (code && !isValidDiscountCode(code)) {
+    throw new Error("That code is not valid.");
+  }
+
   if (import.meta.env.DEV) {
     const res = await fetch("/api/checkout", {
       method: "POST",
@@ -10,6 +19,7 @@ export async function startCheckout({ product, email, clerkUserId }) {
         productId: product.id,
         email,
         clerkUserId: clerkUserId || undefined,
+        discountCode: code || undefined,
       }),
     });
     const data = await res.json();
@@ -18,7 +28,7 @@ export async function startCheckout({ product, email, clerkUserId }) {
     return;
   }
 
-  const link = stripeLinkFor(product);
+  const link = code ? stripePromoLinkFor(product) : stripeLinkFor(product);
   if (!link) {
     throw new Error("Checkout is not configured for this pack.");
   }

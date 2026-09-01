@@ -616,6 +616,30 @@ h2 {
   font-size: 14px;
 }
 
+.hint.error {
+  color: #a83a1f;
+  font-weight: 600;
+}
+
+.hint.code-ok {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.linkish {
+  align-self: flex-start;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 180ms ease;
+}
+
+.linkish:hover {
+  color: var(--ink);
+}
+
 .clerk-wrap {
   padding: 48px 0 80px;
   display: grid;

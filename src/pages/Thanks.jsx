@@ -14,12 +14,13 @@ function purchaseFromParams(params) {
   const token = params.get("t");
   const product = getProduct(slug);
   if (!product || !token) return null;
+  const amountParam = Number(params.get("a"));
   return {
     productId: product.id,
     name: product.name,
     file: product.file,
     token,
-    amount: product.price,
+    amount: Number.isFinite(amountParam) && amountParam > 0 ? amountParam : product.price,
     email: params.get("email") || "",
     purchasedAt: Date.now(),
   };
