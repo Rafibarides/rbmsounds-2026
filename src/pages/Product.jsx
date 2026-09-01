@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import { formatMoney, getProduct } from "../data/products";
 import AudioDemos from "../components/AudioDemos";
@@ -8,6 +8,8 @@ import StemList from "../components/StemList";
 export default function Product() {
   const { slug } = useParams();
   const product = getProduct(slug);
+  const buyRef = useRef(null);
+  const [barVisible, setBarVisible] = useState(false);
 
   useEffect(() => {
     if (product) document.title = `${product.name} · RBM Sounds`;
@@ -15,6 +17,19 @@ export default function Product() {
       document.title = "RBM Sounds";
     };
   }, [product]);
+
+  useEffect(() => {
+    const node = buyRef.current;
+    if (!node) return undefined;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setBarVisible(!entry.isIntersecting && entry.boundingClientRect.top < 0);
+      },
+      { threshold: 0 }
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [slug]);
 
   if (!product) return <Navigate to="/" replace />;
 
@@ -35,7 +50,7 @@ export default function Product() {
             <span className="price">{formatMoney(product.price)}</span>
             <span className="price compare">{formatMoney(product.compareAt)}</span>
           </div>
-          <div className="actions">
+          <div className="actions" ref={buyRef}>
             <BuyButton product={product} className="btn btn-primary">
               Buy now
             </BuyButton>
@@ -50,7 +65,7 @@ export default function Product() {
             <h2>Listen</h2>
           </div>
           {product.youtube ? (
-            <div className="yt" style={{ marginBottom: 18 }}>
+            <div className="yt" style={{ marginBottom: 24 }}>
               <iframe
                 src={`https://www.youtube-nocookie.com/embed/${product.youtube}?rel=0&modestbranding=1`}
                 title={`${product.name} video demo`}
@@ -60,7 +75,7 @@ export default function Product() {
             </div>
           ) : null}
           {product.videoDemo ? (
-            <div className="yt" style={{ marginBottom: 18 }}>
+            <div className="yt" style={{ marginBottom: 24 }}>
               <video src={product.videoDemo} controls playsInline />
             </div>
           ) : null}
@@ -68,11 +83,9 @@ export default function Product() {
         </section>
       ) : null}
 
-      <div className="buy-bar">
+      <div className={`buy-bar${barVisible ? " show" : ""}`}>
         <div>
-          <div className="meta" style={{ color: "var(--y-3)" }}>
-            {product.stemLabel || product.stemCount} sounds
-          </div>
+          <div className="buy-bar-name">{product.name}</div>
           <div className="price-row">
             <span className="price">{formatMoney(product.price)}</span>
             <span className="price compare">{formatMoney(product.compareAt)}</span>
