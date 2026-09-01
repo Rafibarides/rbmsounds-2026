@@ -1,11 +1,60 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { bundle, catalog, formatMoney } from "../data/products";
+import { bundle, bundlePreviews, catalog, formatMoney } from "../data/products";
 import BuyButton from "../components/BuyButton";
-import StemList from "../components/StemList";
+import AudioDemos from "../components/AudioDemos";
+import SamplePreviews from "../components/SamplePreviews";
 
 const soldSeparately = catalog.reduce((sum, pack) => sum + pack.price, 0);
-const savings = soldSeparately - bundle.price;
+const discount = soldSeparately - bundle.price;
+
+const contentGroups = [
+  { title: "Main pack", items: bundle.contents },
+  ...catalog.map((pack) => ({ title: pack.name, items: pack.contents })),
+];
+
+const packDemos = catalog.flatMap((pack) =>
+  (pack.audioDemos || []).map((demo) => ({
+    ...demo,
+    title: `${pack.name} · ${demo.title}`,
+  }))
+);
+
+function remainingToday() {
+  const end = new Date();
+  end.setHours(24, 0, 0, 0);
+  return Math.max(0, end.getTime() - Date.now());
+}
+
+function Countdown() {
+  const [left, setLeft] = useState(remainingToday);
+
+  useEffect(() => {
+    const id = setInterval(() => setLeft(remainingToday()), 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const total = Math.floor(left / 1000);
+  const cells = [
+    { value: String(Math.floor(total / 3600)).padStart(2, "0"), unit: "hrs" },
+    { value: String(Math.floor((total % 3600) / 60)).padStart(2, "0"), unit: "min" },
+    { value: String(total % 60).padStart(2, "0"), unit: "sec" },
+  ];
+
+  return (
+    <div className="countdown">
+      <span className="countdown-label">Sale price ends in</span>
+      <div className="countdown-digits">
+        {cells.map((cell) => (
+          <div className="countdown-cell" key={cell.unit}>
+            <b key={cell.value}>{cell.value}</b>
+            <i>{cell.unit}</i>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function Bundle() {
   const buyRef = useRef(null);
@@ -39,35 +88,35 @@ export default function Bundle() {
         </div>
         <div className="product-info">
           <p className="kicker">{bundle.tag}</p>
-          <h1>{bundle.name}</h1>
+          <h1 className="shine">{bundle.name}</h1>
           <p className="lede">{bundle.description}</p>
           <p className="meta">
-            {bundle.stemLabel} sounds · 6 kits + RBM Drum Hits · Digital download
+            {bundle.stemLabel} sounds · 6 kits + RBM Drum Hits · One download
           </p>
-          <div className="price-row">
-            <span className="price">{formatMoney(bundle.price)}</span>
-            <span className="price compare">{formatMoney(bundle.compareAt)}</span>
-          </div>
-          <div className="actions" ref={buyRef}>
-            <BuyButton product={bundle} className="btn btn-primary">
+          <div className="pedestal" ref={buyRef}>
+            <div className="pedestal-meta">
+              <span>
+                Value <strong>{formatMoney(soldSeparately)}</strong>
+              </span>
+              <span>
+                Discount <strong>−{formatMoney(discount)}</strong>
+              </span>
+            </div>
+            <div className="pedestal-price">{formatMoney(bundle.price)}</div>
+            <BuyButton product={bundle} className="btn btn-primary btn-wide">
               Buy now
             </BuyButton>
-          </div>
-          <div className="receipt-lines" style={{ marginTop: 8 }}>
-            <div className="receipt-line">
-              <span>Kits sold separately</span>
-              <span>{formatMoney(soldSeparately)}</span>
-            </div>
-            <div className="receipt-line">
-              <span>Bundle</span>
-              <span>{formatMoney(bundle.price)}</span>
-            </div>
-            <div className="receipt-line">
-              <span>You keep</span>
-              <span>{formatMoney(savings)}</span>
-            </div>
+            <Countdown />
           </div>
         </div>
+      </section>
+
+      <section className="section" style={{ paddingTop: 0 }}>
+        <div className="section-head">
+          <h2>Preview the sounds</h2>
+          <p>Ten samples pulled straight from the bundle.</p>
+        </div>
+        <SamplePreviews samples={bundlePreviews} />
       </section>
 
       <section className="section" style={{ paddingTop: 0 }}>
@@ -106,15 +155,25 @@ export default function Bundle() {
         </div>
       </section>
 
+      {packDemos.length > 0 ? (
+        <section className="section" style={{ paddingTop: 0 }}>
+          <div className="section-head">
+            <h2>Pack demos</h2>
+            <p>Full demos from the kits in this bundle.</p>
+          </div>
+          <AudioDemos demos={packDemos} />
+        </section>
+      ) : null}
+
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="value-band">
           <div className="value-band-copy">
             <p className="kicker">One checkout</p>
-            <h2>Seven downloads. {bundle.stemLabel} sounds.</h2>
+            <h2>One download. {bundle.stemLabel} sounds.</h2>
             <div className="value-band-stats">
               <div>
                 <span className="value-stat">{formatMoney(soldSeparately)}</span>
-                <span className="value-label">Sold separately</span>
+                <span className="value-label">Value</span>
               </div>
               <div>
                 <span className="value-stat accent">{formatMoney(bundle.price)}</span>
@@ -134,10 +193,22 @@ export default function Bundle() {
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="section-head">
           <h2>Full contents</h2>
-          <p>Counts across the whole bundle.</p>
+          <p>Every kit broken down, top to bottom.</p>
         </div>
         <div className="contents-card">
-          <StemList contents={bundle.contents} />
+          <div className="contents-columns">
+            {contentGroups.map((group) => (
+              <div className="contents-group" key={group.title}>
+                <h3>{group.title}</h3>
+                {group.items.map((item) => (
+                  <div className="stem" key={`${group.title}-${item.label}`}>
+                    <span>{item.label}</span>
+                    <span>{item.count ?? ""}</span>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

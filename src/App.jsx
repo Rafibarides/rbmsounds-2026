@@ -17,10 +17,10 @@ export default function App() {
   useEffect(() => {
     if (location.hash) {
       const node = document.querySelector(location.hash);
-      if (node) node.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (node) node.scrollIntoView({ block: "start" });
       return;
     }
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo(0, 0);
   }, [location.pathname, location.hash]);
 
   return (

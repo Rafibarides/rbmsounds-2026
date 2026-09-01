@@ -229,6 +229,19 @@ export const products = [
   },
 ];
 
+export const bundlePreviews = [
+  { title: "Drum Loop Disco 1", pack: "Disco Funk Toolkit", type: "Drum loop", info: "113 BPM", duration: "0:09", src: `${R2}/previews/bundle/01-disco-drum-loop.mp3` },
+  { title: "Disco Funk Guitar 12", pack: "Disco Funk Toolkit", type: "Guitar loop", info: "Em · 120 BPM", duration: "0:16", src: `${R2}/previews/bundle/02-disco-funk-guitar.mp3` },
+  { title: "Bass 4", pack: "Disco Funk Toolkit", type: "Bass loop", info: "Cm · 118 BPM", duration: "0:08", src: `${R2}/previews/bundle/03-disco-bass.mp3` },
+  { title: "Violin 11", pack: "Disco Funk Toolkit", type: "Disco strings", info: "Em · 123 BPM", duration: "0:04", src: `${R2}/previews/bundle/04-disco-strings.mp3` },
+  { title: "Acoustic Guitar 1", pack: "Indie Anthems", type: "Acoustic guitar", info: "C · 100 BPM", duration: "0:10", src: `${R2}/previews/bundle/05-acoustic-guitar.mp3` },
+  { title: "Banjo 4", pack: "Indie Anthems", type: "Banjo loop", info: "Em · 92 BPM", duration: "0:05", src: `${R2}/previews/bundle/06-banjo.mp3` },
+  { title: "Multiloop 14 · Sunrise Drive", pack: "Radio Pop Tools", type: "Multiloop", info: "Cm · 113 BPM", duration: "0:17", src: `${R2}/previews/bundle/07-multiloop.mp3` },
+  { title: "Horns 10 · Trumpet", pack: "Radio Pop Tools", type: "Horn loop", info: "Bbm · 110 BPM", duration: "0:18", src: `${R2}/previews/bundle/08-trumpet.mp3` },
+  { title: "Voice Chop 14", pack: "Radio Pop Tools", type: "Voice chop", info: "Bm · 110 BPM", duration: "0:09", src: `${R2}/previews/bundle/09-voice-chop.mp3` },
+  { title: "Synthwave 4", pack: "Vintage Dreams", type: "Synthwave groove", info: "Dm · 112 BPM", duration: "0:17", src: `${R2}/previews/bundle/10-synthwave.mp3` },
+];
+
 export const catalog = products.filter((p) => p.id !== "bundle");
 export const bundle = products.find((p) => p.id === "bundle");
 
