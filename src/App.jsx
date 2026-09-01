@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Product from "./pages/Product";
+import Bundle from "./pages/Bundle";
 import Checkout from "./pages/Checkout";
 import Account from "./pages/Account";
 import Thanks from "./pages/Thanks";
@@ -28,6 +29,7 @@ export default function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/bundle" element={<Bundle />} />
           <Route path="/checkout/:slug" element={<Checkout />} />
           <Route path="/account" element={<Account />} />
           <Route path="/thanks" element={<Thanks />} />
