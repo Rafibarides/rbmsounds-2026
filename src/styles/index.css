@@ -278,15 +278,6 @@ h2 {
   box-shadow: 0 16px 32px rgba(20, 18, 14, 0.22);
 }
 
-.free-visual {
-  background: var(--ink);
-  padding: 56px;
-}
-
-.free-visual img {
-  object-fit: contain;
-}
-
 .btn[disabled] {
   opacity: 0.55;
   cursor: wait;
@@ -454,6 +445,12 @@ h2 {
   object-fit: cover;
 }
 
+.product-visual.is-square {
+  aspect-ratio: 1;
+  align-self: start;
+  width: 100%;
+}
+
 .product-info {
   background: var(--cream);
   border-radius: 36px;
@@ -466,6 +463,58 @@ h2 {
 
 .product-info .lede {
   max-width: none;
+}
+
+.free-page {
+  padding: 40px 0 56px;
+}
+
+.free-hero {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 36px;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.free-art {
+  aspect-ratio: 1;
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  background: #111;
+}
+
+.free-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.free-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.free-copy h1 {
+  font-size: clamp(32px, 4vw, 44px);
+}
+
+.free-copy .lede {
+  max-width: 42ch;
+  font-size: 16px;
+}
+
+.free-page .samples-card {
+  border-radius: 20px;
+  padding: 8px;
+}
+
+.page:has(.free-page) .site-footer {
+  margin-top: 48px;
 }
 
 .stems {
@@ -1306,8 +1355,22 @@ h2 {
   .product-hero,
   .footer-grid,
   .checkout,
-  .value-band {
+  .value-band,
+  .free-hero {
     grid-template-columns: 1fr;
+  }
+
+  .free-page {
+    padding: 28px 0 40px;
+  }
+
+  .free-hero {
+    gap: 22px;
+    margin-bottom: 20px;
+  }
+
+  .free-art {
+    max-width: 280px;
   }
 
   .grid {
@@ -1335,10 +1398,6 @@ h2 {
     height: 42px;
     right: 10px;
     bottom: 10px;
-  }
-
-  .free-visual {
-    padding: 36px;
   }
 
   .kit-grid {

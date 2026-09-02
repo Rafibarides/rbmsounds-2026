@@ -257,6 +257,7 @@ export const freeKit = {
   tag: "Free kit",
   description:
     "Radio ready electric guitars. Chord riffs recorded, mixed, and cut to loop, so a song starts the second one hits the timeline. No checkout, just the download.",
+  art: "/art/disco-pop-party-guitar.png",
   file: `${R2}/packs/Disco%20Pop%20Party%20Guitar%20MINI%20KIT.zip`,
   previews: [
     { title: "Guitar Chords Riff 18", pack: "Disco Pop Party", type: "Guitar loop", info: "F · 120 BPM", duration: "0:16", src: `${R2}/previews/RBM_DPDE_Electric_Guitar_Chords_Riff_Disco_Funk_18_keyF_120bpm.wav` },
