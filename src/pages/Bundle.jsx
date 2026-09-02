@@ -114,7 +114,7 @@ export default function Bundle() {
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="section-head">
           <h2>Preview the sounds</h2>
-          <p>Ten samples pulled straight from the bundle.</p>
+          <p>Samples pulled straight from the bundle.</p>
         </div>
         <SamplePreviews samples={bundlePreviews} />
       </section>

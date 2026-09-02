@@ -51,7 +51,7 @@ export default function Product() {
             <span className="price compare">{formatMoney(product.compareAt)}</span>
           </div>
           <div className="actions" ref={buyRef}>
-            <BuyButton product={product} className="btn btn-primary">
+            <BuyButton product={product} className="btn btn-buy">
               Buy now
             </BuyButton>
           </div>

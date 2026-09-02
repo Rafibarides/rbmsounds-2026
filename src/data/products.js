@@ -64,6 +64,7 @@ export const products = [
     file: "disco-funk-toolkit.zip",
     art: "/art/disco-funk-toolkit.jpg",
     square: "/art/square-disco-funk.jpg",
+    preview: `${R2}/demos/disco/disco-sample-1.wav`,
     youtube: "2VkMds9LKcc",
     audioDemos: [
       { title: "Sample 1", src: `${R2}/demos/disco/disco-sample-1.wav` },
@@ -98,6 +99,7 @@ export const products = [
     file: "spanish-essentials.zip",
     art: "/art/spanish-essentials.jpg",
     square: "/art/square-spanish.jpg",
+    preview: `${R2}/demos/spanish/demo-1-110bpm.wav`,
     youtube: "3I3-wl2mLK4",
     audioDemos: [
       { title: "Demo 1 · 110 BPM", src: `${R2}/demos/spanish/demo-1-110bpm.wav` },
@@ -135,6 +137,7 @@ export const products = [
     file: "indie-anthems.zip",
     art: "/art/indie-anthems.jpg",
     square: "/art/square-indie.jpg",
+    preview: `${R2}/demos/Indie/Indie%20Demo.wav`,
     youtube: "7LIByhgq6g0",
     contents: [
       { label: "Acoustic guitar loops", count: 47 },
@@ -160,6 +163,7 @@ export const products = [
     file: "radio-pop-tools.zip",
     art: "/art/radio-pop-tools.jpg",
     square: "/art/square-radio-pop.jpg",
+    preview: `${R2}/demos/pop/multiloop-14-sunrise-drive.mp3`,
     contents: [
       { label: "Acoustic guitar loops", count: 23 },
       { label: "Slide guitar loops", count: 5 },
@@ -193,6 +197,7 @@ export const products = [
     file: "vintage-dreams.zip",
     art: "/art/vintage-dreams.jpg",
     square: "/art/square-vintage.jpg",
+    preview: `${R2}/demos/Vintage%20Dream/Vontage%20Dream%201.wav`,
     youtube: "PqchWeSKjBY",
     contents: [
       { label: "Ambient drones", count: 8 },
@@ -214,6 +219,7 @@ export const products = [
     file: "rap-grooves.zip",
     art: "/art/rap-grooves.png",
     square: "/art/square-rap-grooves.png",
+    preview: `${R2}/demos/rap-grooves/demo-audio.mp3`,
     videoDemo: `${R2}/demos/rap-grooves/demo.m4v`,
     contents: [
       { label: "808 loops", count: 5 },
@@ -230,17 +236,34 @@ export const products = [
 ];
 
 export const bundlePreviews = [
-  { title: "Drum Loop Disco 1", pack: "Disco Funk Toolkit", type: "Drum loop", info: "113 BPM", duration: "0:09", src: `${R2}/previews/bundle/01-disco-drum-loop.mp3` },
-  { title: "Disco Funk Guitar 12", pack: "Disco Funk Toolkit", type: "Guitar loop", info: "Em · 120 BPM", duration: "0:16", src: `${R2}/previews/bundle/02-disco-funk-guitar.mp3` },
-  { title: "Bass 4", pack: "Disco Funk Toolkit", type: "Bass loop", info: "Cm · 118 BPM", duration: "0:08", src: `${R2}/previews/bundle/03-disco-bass.mp3` },
-  { title: "Violin 11", pack: "Disco Funk Toolkit", type: "Disco strings", info: "Em · 123 BPM", duration: "0:04", src: `${R2}/previews/bundle/04-disco-strings.mp3` },
-  { title: "Acoustic Guitar 1", pack: "Indie Anthems", type: "Acoustic guitar", info: "C · 100 BPM", duration: "0:10", src: `${R2}/previews/bundle/05-acoustic-guitar.mp3` },
-  { title: "Banjo 4", pack: "Indie Anthems", type: "Banjo loop", info: "Em · 92 BPM", duration: "0:05", src: `${R2}/previews/bundle/06-banjo.mp3` },
-  { title: "Multiloop 14 · Sunrise Drive", pack: "Radio Pop Tools", type: "Multiloop", info: "Cm · 113 BPM", duration: "0:17", src: `${R2}/previews/bundle/07-multiloop.mp3` },
-  { title: "Horns 10 · Trumpet", pack: "Radio Pop Tools", type: "Horn loop", info: "Bbm · 110 BPM", duration: "0:18", src: `${R2}/previews/bundle/08-trumpet.mp3` },
-  { title: "Voice Chop 14", pack: "Radio Pop Tools", type: "Voice chop", info: "Bm · 110 BPM", duration: "0:09", src: `${R2}/previews/bundle/09-voice-chop.mp3` },
-  { title: "Synthwave 4", pack: "Vintage Dreams", type: "Synthwave groove", info: "Dm · 112 BPM", duration: "0:17", src: `${R2}/previews/bundle/10-synthwave.mp3` },
+  { title: "Disco Funk Guitar 14", pack: "Disco Funk Toolkit", type: "Guitar loop", info: "Em · 123 BPM", duration: "0:16", src: `${R2}/previews/bundle/01-disco-funk-guitar-14.mp3` },
+  { title: "Bass 2", pack: "Disco Funk Toolkit", type: "Bass loop", info: "F#m · 107 BPM", duration: "0:18", src: `${R2}/previews/bundle/02-bass-2.mp3` },
+  { title: "Acoustic Guitar 35", pack: "Indie Anthems", type: "Acoustic guitar", info: "F# · 95 BPM", duration: "0:10", src: `${R2}/previews/bundle/03-acoustic-guitar-35.mp3` },
+  { title: "Ukulele 3", pack: "Indie Anthems", type: "Ukulele loop", info: "Em · 94 BPM", duration: "0:20", src: `${R2}/previews/bundle/04-ukulele-3.mp3` },
+  { title: "Banjo 6", pack: "Indie Anthems", type: "Banjo loop", info: "Em · 92 BPM", duration: "0:10", src: `${R2}/previews/bundle/05-banjo-6.mp3` },
+  { title: "Drum Loop 3", pack: "Indie Anthems", type: "Drum loop", info: "95 BPM", duration: "0:10", src: `${R2}/previews/bundle/06-drum-loop-3.mp3` },
+  { title: "Electric Guitar 1", pack: "Radio Pop Tools", type: "Guitar loop", info: "F# · 120 BPM", duration: "0:16", src: `${R2}/previews/bundle/07-electric-guitar-1.mp3` },
+  { title: "Keys 5", pack: "Radio Pop Tools", type: "Keys loop", info: "F#m · 91 BPM", duration: "0:11", src: `${R2}/previews/bundle/08-keys-5.mp3` },
+  { title: "Latin Perc Loop 5", pack: "Spanish Essentials", type: "Percussion loop", info: "112 BPM", duration: "0:09", src: `${R2}/previews/bundle/09-latin-perc-5.mp3` },
+  { title: "Latin Perc Loop 1", pack: "Spanish Essentials", type: "Percussion loop", info: "112 BPM", duration: "0:51", src: `${R2}/previews/bundle/10-latin-perc-1.mp3` },
+  { title: "Nylon Guitar 15", pack: "Spanish Essentials", type: "Guitar loop", info: "Ebm · 110 BPM", duration: "0:17", src: `${R2}/previews/bundle/11-nylon-guitar-15.mp3` },
+  { title: "Rap Drum Loop 5", pack: "Rap Grooves", type: "Drum loop", info: "77 BPM", duration: "0:25", src: `${R2}/previews/bundle/12-rap-drum-loop-5.mp3` },
+  { title: "Synthwave 6", pack: "Vintage Dreams", type: "Synthwave groove", info: "Dm · 140 BPM", duration: "0:27", src: `${R2}/previews/bundle/13-synthwave-6.mp3` },
 ];
+
+export const freeKit = {
+  id: "disco-pop-party-guitar-mini-kit",
+  name: "Disco Pop Party Guitar Mini Kit",
+  tag: "Free kit",
+  description:
+    "Radio ready electric guitars. Chord riffs recorded, mixed, and cut to loop, so a song starts the second one hits the timeline. No checkout, just the download.",
+  file: `${R2}/packs/Disco%20Pop%20Party%20Guitar%20MINI%20KIT.zip`,
+  previews: [
+    { title: "Guitar Chords Riff 18", pack: "Disco Pop Party", type: "Guitar loop", info: "F · 120 BPM", duration: "0:16", src: `${R2}/previews/RBM_DPDE_Electric_Guitar_Chords_Riff_Disco_Funk_18_keyF_120bpm.wav` },
+    { title: "Guitar Chords Riff 31", pack: "Disco Pop Party", type: "Guitar loop", info: "F#m · 125 BPM", duration: "0:15", src: `${R2}/previews/RBM_DPDE_Electric_Guitar_Chords_Riff_Disco_Funk_31_keyF%23m_125bpm.wav` },
+    { title: "Guitar Chords Riff 34", pack: "Disco Pop Party", type: "Guitar loop", info: "Em · 125 BPM", duration: "0:15", src: `${R2}/previews/RBM_DPDE_Electric_Guitar_Chords_Riff_Disco_Funk_34_keyEm_125bpm.wav` },
+  ],
+};
 
 export const catalog = products.filter((p) => p.id !== "bundle");
 export const bundle = products.find((p) => p.id === "bundle");

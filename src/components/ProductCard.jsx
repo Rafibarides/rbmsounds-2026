@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { formatMoney } from "../data/products";
 import BuyButton from "./BuyButton";
+import PreviewButton from "./PreviewButton";
 
 export default function ProductCard({ product }) {
   return (
@@ -12,6 +13,9 @@ export default function ProductCard({ product }) {
       />
       <div className="card-art">
         <img src={product.square || product.art} alt={product.name} loading="lazy" />
+        {product.preview ? (
+          <PreviewButton src={product.preview} label={product.name} />
+        ) : null}
       </div>
       <div className="card-body">
         <p className="kicker">{product.tag}</p>
@@ -22,7 +26,7 @@ export default function ProductCard({ product }) {
           <span className="price compare">{formatMoney(product.compareAt)}</span>
         </div>
         <div className="actions">
-          <BuyButton product={product} />
+          <BuyButton product={product} className="btn btn-buy" />
         </div>
       </div>
     </article>
