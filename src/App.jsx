@@ -1,5 +1,7 @@
 import { useEffect } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, useSearchParams } from "react-router-dom";
+import { applySeo, seoForPath } from "./lib/seo";
+import { getProduct } from "./data/products";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -14,6 +16,19 @@ import SignUpPage from "./pages/SignUp";
 
 export default function App() {
   const location = useLocation();
+  const [params] = useSearchParams();
+
+  useEffect(() => {
+    const seo = seoForPath(location.pathname);
+    if (location.pathname === "/thanks") {
+      const product = getProduct(params.get("p"));
+      if (product) {
+        seo.image = product.square || product.art;
+        seo.title = `Thank you · ${product.name} · RBM Sounds`;
+      }
+    }
+    applySeo(seo);
+  }, [location.pathname, params]);
 
   useEffect(() => {
     if (location.hash) {

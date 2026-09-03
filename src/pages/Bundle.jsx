@@ -61,13 +61,6 @@ export default function Bundle() {
   const [barVisible, setBarVisible] = useState(false);
 
   useEffect(() => {
-    document.title = "RBM Bundle · RBM Sounds";
-    return () => {
-      document.title = "RBM Sounds";
-    };
-  }, []);
-
-  useEffect(() => {
     const node = buyRef.current;
     if (!node) return undefined;
     const observer = new IntersectionObserver(

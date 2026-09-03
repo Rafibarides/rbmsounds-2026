@@ -12,13 +12,6 @@ export default function Product() {
   const [barVisible, setBarVisible] = useState(false);
 
   useEffect(() => {
-    if (product) document.title = `${product.name} · RBM Sounds`;
-    return () => {
-      document.title = "RBM Sounds";
-    };
-  }, [product]);
-
-  useEffect(() => {
     const node = buyRef.current;
     if (!node) return undefined;
     const observer = new IntersectionObserver(

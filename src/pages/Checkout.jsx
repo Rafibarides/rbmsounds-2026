@@ -17,13 +17,6 @@ export default function Checkout() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (product) document.title = `Checkout · ${product.name} · RBM Sounds`;
-    return () => {
-      document.title = "RBM Sounds";
-    };
-  }, [product]);
-
-  useEffect(() => {
     const clerkEmail = user?.primaryEmailAddress?.emailAddress;
     if (clerkEmail) setEmail((current) => current || clerkEmail);
   }, [user]);

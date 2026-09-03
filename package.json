@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "concurrently -k -n web,api -c yellow,cyan \"vite\" \"node api/server.js\"",
-    "build": "vite build && rm -rf \"dist/RBM ARTWORK\" \"dist/Logo and Marketing\" && cp dist/index.html dist/404.html",
+    "build": "vite build && rm -rf \"dist/RBM ARTWORK\" \"dist/Logo and Marketing\" && node scripts/write-share-pages.mjs",
     "preview": "vite preview",
     "deploy": "npm run build && touch dist/.nojekyll && gh-pages -d dist -b gh-pages --dotfiles --no-history",
     "setup:stripe": "node scripts/create-stripe-links.mjs"

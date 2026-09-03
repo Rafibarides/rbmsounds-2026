@@ -34,13 +34,6 @@ export default function Thanks() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    document.title = "Thank you · RBM Sounds";
-    return () => {
-      document.title = "RBM Sounds";
-    };
-  }, []);
-
-  useEffect(() => {
     let alive = true;
 
     async function run() {

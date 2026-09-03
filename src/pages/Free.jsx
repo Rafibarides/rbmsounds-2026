@@ -1,15 +1,7 @@
-import { useEffect } from "react";
 import { freeKit } from "../data/products";
 import SamplePreviews from "../components/SamplePreviews";
 
 export default function Free() {
-  useEffect(() => {
-    document.title = `${freeKit.name} · RBM Sounds`;
-    return () => {
-      document.title = "RBM Sounds";
-    };
-  }, []);
-
   return (
     <div className="wrap free-page">
       <section className="free-hero">

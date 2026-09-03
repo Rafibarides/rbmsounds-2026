@@ -1,13 +1,9 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { bundle, catalog, formatMoney } from "../data/products";
 import BuyButton from "../components/BuyButton";
 import ProductCard from "../components/ProductCard";
 
 export default function Home() {
-  useEffect(() => {
-    document.title = "RBM Sounds";
-  }, []);
   return (
     <>
       <section className="hero">

@@ -44,11 +44,7 @@ export default function Account() {
   const [local, setLocal] = useState([]);
 
   useEffect(() => {
-    document.title = "Library · RBM Sounds";
     setLocal(readLocalPurchases());
-    return () => {
-      document.title = "RBM Sounds";
-    };
   }, []);
 
   useEffect(() => {
