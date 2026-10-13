@@ -294,7 +294,29 @@ export function stripePromoLinkFor(product) {
   return import.meta.env[key] || "";
 }
 
+function normalizeCode(code) {
+  return (code || "").trim().toUpperCase();
+}
+
+export function getDiscount(code) {
+  const value = normalizeCode(code);
+  if (!value) return null;
+  const sale = import.meta.env.VITE_DISCOUNT_CODE || "";
+  const free = import.meta.env.VITE_FREE_CODE || "";
+  if (sale && value === sale.toUpperCase()) {
+    return { code: value, total: Number(import.meta.env.VITE_DISCOUNT_TOTAL || 500) };
+  }
+  if (free && value === free.toUpperCase()) {
+    return { code: value, total: 0 };
+  }
+  return null;
+}
+
 export function isValidDiscountCode(code) {
-  const expected = import.meta.env.VITE_DISCOUNT_CODE || "";
-  return Boolean(expected) && code.trim().toUpperCase() === expected.toUpperCase();
+  return Boolean(getDiscount(code));
+}
+
+export function packTokenFor(product) {
+  const key = `VITE_PACK_TOKEN_${product.id.replace(/-/g, "_").toUpperCase()}`;
+  return import.meta.env[key] || "";
 }

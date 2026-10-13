@@ -198,11 +198,24 @@ async function createCheckout({ productId, email, clerkUserId, origin, discountC
 
   let amount = pack.price;
   if (discountCode) {
-    const expected = (process.env.DISCOUNT_CODE || "").toUpperCase();
-    if (!expected || discountCode.trim().toUpperCase() !== expected) {
+    const entered = discountCode.trim().toUpperCase();
+    const sale = (process.env.DISCOUNT_CODE || "").toUpperCase();
+    const free = (process.env.FREE_CODE || "").toUpperCase();
+    if (free && entered === free) {
+      amount = 0;
+    } else if (sale && entered === sale) {
+      amount = Number(process.env.DISCOUNT_TOTAL || 500);
+    } else {
       throw new Error("That code is not valid.");
     }
-    amount = Number(process.env.DISCOUNT_TOTAL || 500);
+  }
+  if (amount === 0) {
+    const thanks = new URL("/thanks", origin || "http://localhost:5173");
+    thanks.searchParams.set("p", pack.id);
+    thanks.searchParams.set("t", pack.token);
+    thanks.searchParams.set("a", "0");
+    thanks.searchParams.set("email", email);
+    return { url: thanks.toString() };
   }
   const success = new URL("/thanks", origin || "http://localhost:5173");
   success.searchParams.set("session_id", "{CHECKOUT_SESSION_ID}");

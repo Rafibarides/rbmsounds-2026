@@ -20,7 +20,7 @@ function purchaseFromParams(params) {
     name: product.name,
     file: product.file,
     token,
-    amount: Number.isFinite(amountParam) && amountParam > 0 ? amountParam : product.price,
+    amount: Number.isFinite(amountParam) && amountParam >= 0 ? amountParam : product.price,
     email: params.get("email") || "",
     purchasedAt: Date.now(),
   };
@@ -78,7 +78,7 @@ export default function Thanks() {
   return (
     <div className="wrap thanks">
       <div className="thanks-card">
-        <p className="kicker">Paid</p>
+        <p className="kicker">{purchase?.amount === 0 ? "Complimentary" : "Paid"}</p>
         <h1>{ready && purchase ? "Download ready." : "Confirming order."}</h1>
         {error ? <p className="hint">{error}</p> : null}
         {purchase && product ? (
@@ -88,7 +88,9 @@ export default function Thanks() {
               {new Date(purchase.purchasedAt).toLocaleDateString()}
             </p>
             <p className="hint">
-              A receipt is on its way to your email. Download the pack below.
+              {purchase.amount === 0
+                ? "This download is unlocked with your code."
+                : "A receipt is on its way to your email. Download the pack below."}
             </p>
             <div className="actions">
               <a className="btn btn-primary" href={href}>

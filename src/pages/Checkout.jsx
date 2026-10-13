@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
 import Crown from "../components/Crown";
-import { formatMoney, getProduct, isValidDiscountCode } from "../data/products";
+import { formatMoney, getDiscount, getProduct } from "../data/products";
 import { startCheckout } from "../lib/checkout";
 
 export default function Checkout() {
@@ -23,11 +23,11 @@ export default function Checkout() {
 
   if (!product) return <Navigate to="/" replace />;
 
-  const codeApplied = isValidDiscountCode(code);
-  const promoTotal = Number(import.meta.env.VITE_DISCOUNT_TOTAL || 500);
-  const total = codeApplied ? promoTotal : product.price;
+  const discount = getDiscount(code);
+  const total = discount ? discount.total : product.price;
   const saleSavings = product.compareAt - product.price;
-  const codeSavings = codeApplied ? product.price - promoTotal : 0;
+  const codeSavings = discount ? product.price - discount.total : 0;
+  const isFree = Boolean(discount && discount.total === 0);
   const today = new Date().toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
@@ -88,9 +88,9 @@ export default function Checkout() {
             <span>Limited offer</span>
             <span>-{formatMoney(saleSavings)}</span>
           </div>
-          {codeApplied ? (
+          {discount ? (
             <div className="receipt-line">
-              <span>Code {code.trim().toUpperCase()}</span>
+              <span>Code {discount.code}</span>
               <span>-{formatMoney(codeSavings)}</span>
             </div>
           ) : null}
@@ -125,7 +125,11 @@ export default function Checkout() {
               placeholder="Enter code"
               autoCapitalize="characters"
             />
-            {codeApplied ? <span className="hint code-ok">Code applied.</span> : null}
+            {discount ? (
+              <span className="hint code-ok">
+                {isFree ? "Code applied. Total is $0." : "Code applied."}
+              </span>
+            ) : null}
           </label>
         ) : (
           <button type="button" className="linkish" onClick={() => setShowCode(true)}>
@@ -136,12 +140,19 @@ export default function Checkout() {
         {error ? <p className="hint error">{error}</p> : null}
 
         <button className="btn btn-primary btn-wide" disabled={busy} type="submit">
-          {busy ? "Opening secure payment" : "Continue to payment"}
+          {busy
+            ? isFree
+              ? "Preparing download"
+              : "Opening secure payment"
+            : isFree
+              ? "Get download"
+              : "Continue to payment"}
         </button>
 
         <p className="hint receipt-fine">
-          Payment handled by Stripe. Your receipt lands in this inbox, and the
-          download is waiting right after.{" "}
+          {isFree
+            ? "No payment. The pack unlocks on the next screen."
+            : "Payment handled by Stripe. Your receipt lands in this inbox, and the download is waiting right after."}{" "}
           {user ? null : (
             <>
               <Link to={`/sign-up?redirect_url=${encodeURIComponent(`/checkout/${product.slug}`)}`}>
