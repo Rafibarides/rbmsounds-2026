@@ -1,4 +1,4 @@
-import { freeKit, getProduct } from "../data/products.js";
+import { getProduct } from "../data/products.js";
 
 export const SITE = "https://rbmsounds.com";
 export const BRAND_IMAGE = "/share/rbm-sounds.png";
@@ -30,15 +30,6 @@ export function seoForPath(pathname) {
       description: product.description,
       image: product.square || product.art,
       url: "/bundle",
-    };
-  }
-
-  if (path === "/free") {
-    return {
-      title: `${freeKit.name} · RBM Sounds`,
-      description: freeKit.description,
-      image: freeKit.art,
-      url: "/free",
     };
   }
 
@@ -112,7 +103,6 @@ export function sharePages() {
   const paths = [
     "/",
     "/bundle",
-    "/free",
     "/account",
     "/thanks",
     "/sign-in",

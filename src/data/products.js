@@ -251,6 +251,7 @@ export const bundlePreviews = [
   { title: "Synthwave 6", pack: "Vintage Dreams", type: "Synthwave groove", info: "Dm · 140 BPM", duration: "0:27", src: `${R2}/previews/bundle/13-synthwave-6.mp3` },
 ];
 
+// Parked: page and public download are off. Keep this data to restore later.
 export const freeKit = {
   id: "disco-pop-party-guitar-mini-kit",
   name: "Disco Pop Party Guitar Mini Kit",

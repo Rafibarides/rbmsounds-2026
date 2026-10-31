@@ -16,7 +16,6 @@ export default function Header() {
         <nav className="nav-links">
           <Link to="/#packs">Packs</Link>
           <Link to="/bundle">Bundle</Link>
-          <Link to="/free">Free</Link>
           {signedIn ? (
             <>
               <Link className="keep" to="/account">

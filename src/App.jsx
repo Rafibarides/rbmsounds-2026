@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Route, Routes, useLocation, useSearchParams } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation, useSearchParams } from "react-router-dom";
 import { applySeo, seoForPath } from "./lib/seo";
 import { getProduct } from "./data/products";
 import Header from "./components/Header";
@@ -7,7 +7,6 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Product from "./pages/Product";
 import Bundle from "./pages/Bundle";
-import Free from "./pages/Free";
 import Checkout from "./pages/Checkout";
 import Account from "./pages/Account";
 import Thanks from "./pages/Thanks";
@@ -46,7 +45,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/bundle" element={<Bundle />} />
-          <Route path="/free" element={<Free />} />
+          <Route path="/free" element={<Navigate to="/" replace />} />
           <Route path="/checkout/:slug" element={<Checkout />} />
           <Route path="/account" element={<Account />} />
           <Route path="/thanks" element={<Thanks />} />
