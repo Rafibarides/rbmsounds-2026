@@ -25,7 +25,7 @@ export default function Checkout() {
 
   const discount = getDiscount(code);
   const total = discount ? discount.total : product.price;
-  const saleSavings = product.compareAt - product.price;
+  const saleSavings = (product.compareAt || product.price) - product.price;
   const codeSavings = discount ? product.price - discount.total : 0;
   const isFree = Boolean(discount && discount.total === 0);
   const today = new Date().toLocaleDateString("en-US", {
@@ -75,19 +75,30 @@ export default function Checkout() {
           <p className="kicker">{product.tag}</p>
           <h1 className="receipt-title">{product.name}</h1>
           <p className="hint">
-            {product.stemLabel || product.stemCount} sounds · Instant digital download
+            {product.kind === "plugin"
+              ? `${product.formats} · Instant download`
+              : `${product.stemLabel || product.stemCount} sounds · Instant digital download`}
           </p>
         </div>
 
         <div className="receipt-lines">
-          <div className="receipt-line">
-            <span>List price</span>
-            <span>{formatMoney(product.compareAt)}</span>
-          </div>
-          <div className="receipt-line">
-            <span>Limited offer</span>
-            <span>-{formatMoney(saleSavings)}</span>
-          </div>
+          {product.compareAt && product.compareAt > product.price ? (
+            <>
+              <div className="receipt-line">
+                <span>List price</span>
+                <span>{formatMoney(product.compareAt)}</span>
+              </div>
+              <div className="receipt-line">
+                <span>Limited offer</span>
+                <span>-{formatMoney(saleSavings)}</span>
+              </div>
+            </>
+          ) : (
+            <div className="receipt-line">
+              <span>{product.name}</span>
+              <span>{formatMoney(product.price)}</span>
+            </div>
+          )}
           {discount ? (
             <div className="receipt-line">
               <span>Code {discount.code}</span>

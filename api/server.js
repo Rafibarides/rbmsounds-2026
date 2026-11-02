@@ -224,7 +224,7 @@ async function createCheckout({ productId, email, clerkUserId, origin, discountC
     customer_email: email,
     client_reference_id: clerkUserId || undefined,
     success_url: success.toString().replace("%7BCHECKOUT_SESSION_ID%7D", "{CHECKOUT_SESSION_ID}"),
-    cancel_url: `${origin || "http://localhost:5173"}/${pack.id === "bundle" ? "bundle" : pack.id}`,
+    cancel_url: `${origin || "http://localhost:5173"}/${pack.path || (pack.id === "bundle" ? "bundle" : pack.id)}`,
     allow_promotion_codes: "false",
     billing_address_collection: "auto",
     metadata: {

@@ -7,6 +7,8 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Product from "./pages/Product";
 import Bundle from "./pages/Bundle";
+import Plugins from "./pages/Plugins";
+import Plugin from "./pages/Plugin";
 import Checkout from "./pages/Checkout";
 import Account from "./pages/Account";
 import Thanks from "./pages/Thanks";
@@ -45,6 +47,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/bundle" element={<Bundle />} />
+          <Route path="/plugins" element={<Plugins />} />
+          <Route path="/plugins/:slug" element={<Plugin />} />
           <Route path="/free" element={<Navigate to="/" replace />} />
           <Route path="/checkout/:slug" element={<Checkout />} />
           <Route path="/account" element={<Account />} />

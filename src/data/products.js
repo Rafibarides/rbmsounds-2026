@@ -267,11 +267,58 @@ export const freeKit = {
   ],
 };
 
+export const plugins = [
+  {
+    id: "pro-multi-width",
+    slug: "pro-multi-width",
+    kind: "plugin",
+    name: "Pro Multi-width",
+    tag: "Stereo width",
+    description:
+      "A parametric EQ stereo width processor. Draw how wide each part of the mix should be, from the lows up to the air.",
+    price: 4999,
+    file: "pro-multi-width.zip",
+    art: "/art/pro-multi-width.png",
+    square: "/art/pro-multi-width.png",
+    ui: "/art/pro-multi-width-ui.png",
+    formats: "macOS and Windows · VST3, AU, AAX",
+    features: [
+      {
+        title: "Width curve",
+        body: "The main control. Drag a point up to spread that pitch range wider, or down to pull it toward the center. The middle of the graph leaves the sound as it was. You can place up to eight points.",
+      },
+      {
+        title: "Amount",
+        body: "Sets how much of the curve you actually hear. All the way down, the mix is left alone. All the way up, the curve is in full effect.",
+      },
+      {
+        title: "Presence",
+        body: "Adds a little extra space and shine to the wide part of the sound, mostly in the highs. Leave it down if you only want the curve.",
+      },
+      {
+        title: "Vocal Focus",
+        body: "Turn this on to hold a centered vocal in the middle and let the music around it open up. The knob sets how far that goes.",
+      },
+      {
+        title: "Vocal Range",
+        body: "Slides the focus from a lower, male register to a higher, female one.",
+      },
+      {
+        title: "Gain Match",
+        body: "Keeps the loudness steady as you widen, so a wider mix does not just get louder.",
+      },
+    ],
+  },
+];
+
 export const catalog = products.filter((p) => p.id !== "bundle");
 export const bundle = products.find((p) => p.id === "bundle");
 
 export function getProduct(slug) {
-  return products.find((p) => p.slug === slug);
+  return (
+    products.find((p) => p.slug === slug || p.id === slug) ||
+    plugins.find((p) => p.slug === slug || p.id === slug)
+  );
 }
 
 export function formatMoney(cents) {

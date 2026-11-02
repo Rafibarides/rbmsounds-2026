@@ -1,4 +1,4 @@
-import { getProduct } from "../data/products.js";
+import { getProduct, plugins } from "../data/products.js";
 
 export const SITE = "https://rbmsounds.com";
 export const BRAND_IMAGE = "/share/rbm-sounds.png";
@@ -21,6 +21,28 @@ export function seoForPath(pathname) {
       image: BRAND_IMAGE,
       url: "/",
     };
+  }
+
+  if (path === "/plugins") {
+    const plugin = plugins[0];
+    return {
+      title: "Plugins · RBM Sounds",
+      description: "Stereo tools from RBM.",
+      image: plugin?.art || BRAND_IMAGE,
+      url: "/plugins",
+    };
+  }
+
+  if (path.startsWith("/plugins/")) {
+    const product = getProduct(path.slice("/plugins/".length));
+    if (product) {
+      return {
+        title: `${product.name} · RBM Sounds`,
+        description: product.description,
+        image: product.art,
+        url: `/plugins/${product.slug}`,
+      };
+    }
   }
 
   if (path === "/bundle") {
@@ -103,6 +125,8 @@ export function sharePages() {
   const paths = [
     "/",
     "/bundle",
+    "/plugins",
+    "/plugins/pro-multi-width",
     "/account",
     "/thanks",
     "/sign-in",
@@ -120,6 +144,7 @@ export function sharePages() {
     "/checkout/radio-pop-tools",
     "/checkout/vintage-dreams",
     "/checkout/rap-grooves",
+    "/checkout/pro-multi-width",
   ];
   return paths.map((path) => seoForPath(path));
 }

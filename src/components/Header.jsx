@@ -15,6 +15,9 @@ export default function Header() {
         </Link>
         <nav className="nav-links">
           <Link to="/#packs">Packs</Link>
+          <Link className="keep" to="/plugins">
+            Plugins
+          </Link>
           <Link to="/bundle">Bundle</Link>
           {signedIn ? (
             <>

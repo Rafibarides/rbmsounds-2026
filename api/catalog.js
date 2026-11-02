@@ -54,6 +54,14 @@ export function getPacks() {
       file: "rap-grooves.zip",
       token: token("rap-grooves"),
     },
+    "pro-multi-width": {
+      id: "pro-multi-width",
+      name: "Pro Multi-width",
+      price: 4999,
+      file: "pro-multi-width.zip",
+      token: token("pro-multi-width"),
+      path: "plugins/pro-multi-width",
+    },
   };
 }
 
@@ -68,4 +76,6 @@ export const artUrl = {
     "https://pub-dacf0b528a6844669cc37ccbc42ff66b.r2.dev/art/radio-pop-tools.jpg",
   "vintage-dreams": "https://pub-dacf0b528a6844669cc37ccbc42ff66b.r2.dev/art/vintage-dreams.jpg",
   "rap-grooves": "https://pub-dacf0b528a6844669cc37ccbc42ff66b.r2.dev/art/rap-grooves.png",
+  "pro-multi-width":
+    "https://pub-dacf0b528a6844669cc37ccbc42ff66b.r2.dev/art/pro-multi-width.png",
 };

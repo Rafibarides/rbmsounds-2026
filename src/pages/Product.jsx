@@ -25,6 +25,9 @@ export default function Product() {
   }, [slug]);
 
   if (!product) return <Navigate to="/" replace />;
+  if (product.kind === "plugin") {
+    return <Navigate to={`/plugins/${product.slug}`} replace />;
+  }
 
   return (
     <div className="wrap">
