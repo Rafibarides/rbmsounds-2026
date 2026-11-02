@@ -35,6 +35,7 @@ export default function Plugin() {
           <h1>{product.name}</h1>
           <p className="lede">{product.description}</p>
           <p className="meta">{product.formats}</p>
+          <p className="plugin-note">{product.compatibility}</p>
           <div className="price">{formatMoney(product.price)}</div>
           <div ref={buyRef}>
             <BuyButton product={product} className="btn btn-buy">

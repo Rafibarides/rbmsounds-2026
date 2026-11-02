@@ -281,7 +281,9 @@ export const plugins = [
     art: "/art/pro-multi-width.png",
     square: "/art/pro-multi-width.png",
     ui: "/art/pro-multi-width-ui.png",
-    formats: "macOS and Windows · VST3, AU, AAX",
+    formats: "macOS and Windows · VST3, AU",
+    compatibility:
+      "Works in most DAWs on Mac and Windows, Intel and Apple Silicon. Logic, Reaper, FL Studio, Ableton, and others. Not Avid Pro Tools. AAX needs additional approvals, which we are working on.",
     features: [
       {
         title: "Width curve",

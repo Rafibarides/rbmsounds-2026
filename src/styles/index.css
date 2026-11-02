@@ -1451,6 +1451,13 @@ h2 {
   font-size: 36px;
 }
 
+.plugin-note {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+  max-width: 46ch;
+}
+
 .plugin-ui {
   background: #101614;
   border-radius: 20px;

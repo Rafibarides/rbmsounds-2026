@@ -21,6 +21,7 @@ export default function Plugins() {
               </h2>
               <p className="lede">{plugin.description}</p>
               <p className="meta">{plugin.formats}</p>
+              <p className="plugin-note">{plugin.compatibility}</p>
               <div className="plugin-row-buy">
                 <span className="price">{formatMoney(plugin.price)}</span>
                 <Link className="btn btn-buy" to={`/plugins/${plugin.slug}`}>
