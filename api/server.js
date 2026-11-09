@@ -201,7 +201,10 @@ async function createCheckout({ productId, email, clerkUserId, origin, discountC
     const entered = discountCode.trim().toUpperCase();
     const sale = (process.env.DISCOUNT_CODE || "").toUpperCase();
     const free = (process.env.FREE_CODE || "").toUpperCase();
+    const pluginFree = (process.env.PLUGIN_FREE_CODE || "").toUpperCase();
     if (free && entered === free) {
+      amount = 0;
+    } else if (pluginFree && entered === pluginFree && pack.id === "pro-multi-width") {
       amount = 0;
     } else if (sale && entered === sale) {
       amount = Number(process.env.DISCOUNT_TOTAL || 500);

@@ -23,7 +23,7 @@ export default function Checkout() {
 
   if (!product) return <Navigate to="/" replace />;
 
-  const discount = getDiscount(code);
+  const discount = getDiscount(code, product);
   const total = discount ? discount.total : product.price;
   const saleSavings = (product.compareAt || product.price) - product.price;
   const codeSavings = discount ? product.price - discount.total : 0;

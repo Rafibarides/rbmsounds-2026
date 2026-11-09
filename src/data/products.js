@@ -348,15 +348,23 @@ function normalizeCode(code) {
   return (code || "").trim().toUpperCase();
 }
 
-export function getDiscount(code) {
+export function getDiscount(code, product) {
   const value = normalizeCode(code);
   if (!value) return null;
   const sale = import.meta.env.VITE_DISCOUNT_CODE || "";
   const free = import.meta.env.VITE_FREE_CODE || "";
+  const pluginFree = import.meta.env.VITE_PLUGIN_FREE_CODE || "";
   if (sale && value === sale.toUpperCase()) {
     return { code: value, total: Number(import.meta.env.VITE_DISCOUNT_TOTAL || 500) };
   }
   if (free && value === free.toUpperCase()) {
+    return { code: value, total: 0 };
+  }
+  if (
+    pluginFree &&
+    value === pluginFree.toUpperCase() &&
+    product?.id === "pro-multi-width"
+  ) {
     return { code: value, total: 0 };
   }
   return null;

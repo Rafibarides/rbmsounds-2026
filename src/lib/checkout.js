@@ -21,7 +21,7 @@ function freeThanksUrl(product, email) {
 
 export async function startCheckout({ product, email, clerkUserId, discountCode }) {
   const code = (discountCode || "").trim();
-  const discount = getDiscount(code);
+  const discount = getDiscount(code, product);
   if (code && !discount) {
     throw new Error("That code is not valid.");
   }
